@@ -1,0 +1,74 @@
+----------------------------------------
+Profile 1 term counts: 
+what 1
+life 1
+love 6
+have 2
+just 3
+that 3
+being 5
+friends 2
+about 1
+also 3
+much 2
+they 3
+believe 6
+with 4
+----------------------------------------
+Profile 2 term counts: 
+love 1
+just 2
+that 1
+feel 1
+friends 2
+people 2
+much 2
+know 1
+have 1
+believe 1
+with 5
+----------------------------------------
+Profile 3 term counts: 
+what 5
+love 6
+they 6
+just 5
+people 8
+being 2
+friends 2
+that 8
+life 11
+feel 1
+also 1
+much 1
+know 9
+have 17
+about 4
+with 11
+----------------------------------------
+Profile 4 term counts: 
+also 3
+what 2
+love 1
+have 4
+that 3
+being 3
+friends 2
+people 1
+about 2
+feel 4
+much 1
+they 1
+with 3
+----------------------------------------
+Profile 5 term counts: 
+life 3
+love 2
+people 2
+feel 1
+that 4
+what 1
+much 1
+have 1
+believe 1
+with 1
