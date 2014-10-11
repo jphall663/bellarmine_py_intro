@@ -13,7 +13,7 @@ import numpy as np
 
 ### EXERCISE 5.1: Use the csv module to read the titanic training data 
 # (train.csv) into a numpy array called data.   
-o= open('train.csv', 'rb')
+o= open('train.csv', 'r')
 csv_file= csv.reader(o)                                
 header= csv_file.next()                                
 data= []                                               
@@ -52,7 +52,7 @@ p= open('gendermodel.csv', 'w')
 predictions_file= csv.writer(p)
 predictions_file.writerow(["PassengerId", "Survived"]) # Write the column headers.
 for row in test_file:                                  # For each row in the test file,
-    if (row[3] == 'female'):                           # fs it a female, then
+    if (row[3] == 'female'):                           # if it a female, then
         predictions_file.writerow([row[0], "1"])       # write the PassengerId, and predict 1.
     else:                                              # Otherwise the passenger is male,
         predictions_file.writerow([row[0], "0"])       # write the PassengerId, and predict 0.

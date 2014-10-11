@@ -11,7 +11,7 @@ SOLUTION TO EXERCISE 6
 import csv as csv
 import numpy as np
 
-o= open('train.csv', 'rb')
+o= open('train.csv', 'r')
 csv_file= csv.reader(o)                                # Load the csv file.
 header= csv_file.next()                                # Skip the first line as it is a header.
 data= []                                               # Create a variable to hold the data.

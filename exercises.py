@@ -242,6 +242,67 @@ url= 'http://archive.ics.uci.edu/ml/machine-learning-databases/abalone/abalone.d
 
 ### EXERCISE 6: IPYTHON: PLOTTING RESULTS #####################################
 
-### REFERENCES: 
-# http://nbviewer.ipython.org/github/agconti/kaggle-titanic/blob/master/Titanic.ipynb
+### REFERENCES:
+# http://ipython.org/
+# http://matplotlib.org/
+# http://nbviewer.ipython.org/github/jphall663/bellarmine_py_intro/blob/master/Titanic.ipynb
 
+### To start an Ipython session:
+# 1.) Open a command prompt and change directories to the class working directory.
+# 2.) Start an Ipython session by typing something like:
+#     C:\Anaconda\ipython.exe notebook
+# 2.) Open a browser and navigate to the given url, 
+#     probably something like: http://localhost:8888/
+# 3.) Press 'New Notebook' in the upper righthand corner.
+# 4.) Enter the python statements in this exercise into the notebook prompt 
+# one-by-one. 
+
+# We are going to construct a simple stacked bar chart ... 
+
+# Import the training data. 
+import csv as csv
+import numpy as np
+
+o= open('train.csv', 'r')
+csv_file= csv.reader(o)                                # Load the csv file.
+header= csv_file.next()                                # Skip the first line as it is a header.
+data= []                                               # Create a variable to hold the data.
+
+for row in csv_file:                                   # Skip through each row in the csv file,
+    data.append(row[0:])                               # adding each row to the data variable.
+data= np.array(data)                                   # Then convert from a list to a Numpy array.
+o.close()
+
+# Import matplotlib and allow it to plot in the notebook.
+import matplotlib.pyplot as plt
+%matplotlib inline                                     
+
+# Import Numpy
+import numpy as np
+
+# Make some magic numbers for the plot ... like:
+# The location along the x-axis where the bars will sit.
+# And the width of the bars.
+bottom_locs= np.array([1.,2.])
+width= 0.3                     
+
+# Define the actual quanities to plot:
+# The numbers of men who died and who survived.
+# The numbers of women who died and who survived.
+men_only_stats= data[0::,4] != "female"                   # This finds all the men. 
+men_onboard= data[men_only_stats,1].astype(np.float)      # 1st column of data (survived= 0,1), but only men.
+men= (np.size(men_onboard)-np.sum(men_onboard), np.sum(men_onboard))
+
+women_only_stats= data[0::,4] == "female"                 # This finds all the women. 
+women_onboard= data[women_only_stats,1].astype(np.float)  # 1st column of data (survived= 0,1), but only women. 
+women= (np.size(women_onboard)-np.sum(women_onboard), np.sum(women_onboard))
+
+# Add the values to the plot.
+plt.bar(bottom_locs, men, label= 'Male', width= width)
+plt.bar(bottom_locs, women, color= 'm', label= 'Female', width= width, bottom= men)
+
+# Decorate the plot.
+plt.ylabel('Count')
+plt.title('Who Survived the Titanic?')
+plt.legend(loc='best')
+plt.xticks(bottom_locs+width/2., ('Died', 'Survived'))

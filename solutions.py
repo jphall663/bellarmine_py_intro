@@ -442,7 +442,7 @@ proportion_women_survived = np.sum(women_onboard) / np.size(women_onboard)
 print 'Proportion of women who survived is %s' % proportion_women_survived
 
 men_only_stats= data[0::,4] != "female" 	              # This finds all the men. 
-men_onboard= data[men_only_stats,1].astype(np.float)     # 1st column of data (survived= 0,1), but only men
+men_onboard= data[men_only_stats,1].astype(np.float)     # 1st column of data (survived= 0,1), but only men.
 proportion_men_survived = np.sum(men_onboard) / np.size(men_onboard)
 print 'Proportion of men who survived is %s' % proportion_men_survived
 
@@ -491,8 +491,7 @@ our predictions are correct in the test data - this is pretty good for real data
 ### REFERENCES:
 # http://ipython.org/
 # http://matplotlib.org/
-
-
+# http://nbviewer.ipython.org/github/jphall663/bellarmine_py_intro/blob/master/Titanic.ipynb
 
 ### To start an Ipython session:
 # 1.) Open a command prompt and change directories to the class working directory.
@@ -503,14 +502,13 @@ our predictions are correct in the test data - this is pretty good for real data
 # 3.) Press 'New Notebook' in the upper righthand corner.
 # 4.) Enter the python statements in this exercise into the notebook prompt.
 
-#%%
 # We are going to construct a simple stacked bar chart ... 
 
 # Import the training data. 
 import csv as csv
 import numpy as np
 
-o= open('train.csv', 'rb')
+o= open('train.csv', 'r')
 csv_file= csv.reader(o)                                # Load the csv file.
 header= csv_file.next()                                # Skip the first line as it is a header.
 data= []                                               # Create a variable to hold the data.
@@ -527,6 +525,7 @@ import matplotlib.pyplot as plt
 # Import Numpy
 import numpy as np
 
+
 # Make some magic numbers for the plot ... like:
 # The location along the x-axis where the bars will sit.
 # And the width of the bars.
@@ -537,7 +536,7 @@ width= 0.3
 # The numbers of men who died and who survived.
 # The numbers of women who died and who survived.
 men_only_stats= data[0::,4] != "female"                   # This finds all the men. 
-men_onboard= data[men_only_stats,1].astype(np.float)      # 1st column of data (survived= 0,1), but only men
+men_onboard= data[men_only_stats,1].astype(np.float)      # 1st column of data (survived= 0,1), but only men.
 men= (np.size(men_onboard)-np.sum(men_onboard), np.sum(men_onboard))
 
 women_only_stats= data[0::,4] == "female"                 # This finds all the women. 
@@ -550,6 +549,6 @@ plt.bar(bottom_locs, women, color= 'm', label= 'Female', width= width, bottom= m
 
 # Decorate the plot.
 plt.ylabel('Count')
-plt.title("Who Survived the Titanic?")
+plt.title('Who Survived the Titanic?')
 plt.legend(loc='best')
 plt.xticks(bottom_locs+width/2., ('Died', 'Survived'))
