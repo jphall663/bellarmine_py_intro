@@ -194,6 +194,8 @@ and stop it ... just to find out it was almost finished !!!
 
 """
 
+### BONUS EXERCISE 2.5: Execute the solution_2.py file from the OS command prompt. 
+
 #%%         
 ### EXERCISE 3: LISTS, DICTIONARIES, AND SETS ################################# 
 ### In exercises 2 and 3 we will clean up several example dating profiles. Once we have 
@@ -387,10 +389,167 @@ o.close()
 - http://www.kaggle.com/
 ...
 """
-
+#%%
 ### EXERCISE 5: KAGGLE TITANIC COMPETITION ####################################
 
-# REFERENCE: http://www.kaggle.com/c/titanic-gettingStarted
+### REFERENCES: 
+# http://www.kaggle.com/c/titanic-gettingStarted
+# http://wiki.scipy.org/Tentative_NumPy_Tutorial
+# https://docs.python.org/2/library/csv.html
+# gendermodel.py - by Kaggle user AstroDave
 
+#%%
+### EXERCISE 5.1: Use the csv module to read the titanic training data 
+# (train.csv) into a numpy array called data.   
+import csv as csv
+import numpy as np
+
+o= open('train.csv', 'rb')
+csv_file= csv.reader(o)                                # Load the csv file.
+header= csv_file.next()                                # Skip the first line as it is a header.
+data= []                                               # Create a variable to hold the data.
+
+for row in csv_file:                                   # Skip through each row in the csv file,
+    data.append(row[0:])                               # adding each row to the data variable.
+data= np.array(data)                                   # Then convert from a list to a Numpy array.
+o.close()
+
+### Numpy also has: 
+# data= np.genfromtxt('train.csv', delimiter=',', skip_header=1)
+# But the data needs to be really clean.
+
+#%%
+### EXERCISE 5.2
+# A: How many people were on the titanic?
+number_passengers= np.size(data[::,1].astype(np.float))  # :: means every element
+print number_passengers                                  # [::,1] every row in the first column
+                                                         # Numpy matrices [rows, columns]
+# B: How many people survived?
+number_survived= np.sum(data[::,1].astype(np.float))
+print number_survived
+
+# C: What proportion of people survived?
+proportion_survivors= number_survived / number_passengers 
+print proportion_survivors
+ 
+#%%
+# EXERCISE 5.3: "WOMEN AND CHILDREN FIRST!" 
+# What proportion of women survived? What proportion of men survived?
+
+women_only_stats= data[0::,4] == "female" 	              # This finds where all the women are in the data set.
+women_onboard= data[women_only_stats,1].astype(np.float) # 1st column of data (survived= 0,1), but only women. 
+proportion_women_survived = np.sum(women_onboard) / np.size(women_onboard)
+print 'Proportion of women who survived is %s' % proportion_women_survived
+
+men_only_stats= data[0::,4] != "female" 	              # This finds all the men. 
+men_onboard= data[men_only_stats,1].astype(np.float)     # 1st column of data (survived= 0,1), but only men
+proportion_men_survived = np.sum(men_onboard) / np.size(men_onboard)
+print 'Proportion of men who survived is %s' % proportion_men_survived
+
+#%%
+# EXERCISE 5.4: Use the results of this analysis to make predictions about the 
+# the passengers in the test set. Basically, if the passenger was a male, we
+# predict he will die. If she was female, we predict she will survive. 
+#
+# Make a CSV file containing only two columns:
+# First column: the passenger IDs from the test.csv file.
+# Second column: a 0 if the passender was male; a 1 if the passenger was female. 
+# The first row (header) should read: "PassengerId", "Survived"
+
+# Read in test.csv, skipping first row
+o= open('test.csv', 'r')
+test_file= csv.reader(o)
+skip_header= test_file.next()
+
+# Write predictions file
+p= open('gendermodel.csv', 'w')
+predictions_file= csv.writer(p)
+predictions_file.writerow(["PassengerId", "Survived"]) # Write the column headers.
+for row in test_file:                                  # For each row in the test file,
+    if (row[3] == 'female'):                           # if it a female, then
+        predictions_file.writerow([row[0], "1"])       # write the PassengerId, and predict 1.
+    else:                                              # Otherwise the passenger is male,
+        predictions_file.writerow([row[0], "0"])       # write the PassengerId, and predict 0.
+
+o.close()
+p.close()
+
+#%% 
+# BONUS EXERCISE 5.5: Submit your model to the Kaggle competition. What was 
+# your score? What does this number mean?
+
+"""
+0.76555
+
+This is the proportion of correct predictions in the test set. So about 77% of
+our predictions are correct in the test data - this is pretty good for real data.
+
+"""
+#%%
 ### EXERCISE 6: IPYTHON: PLOTTING RESULTS #####################################
 
+### REFERENCES:
+# http://ipython.org/
+# http://matplotlib.org/
+
+
+
+### To start an Ipython session:
+# 1.) Open a command prompt and change directories to the class working directory.
+# 2.) Start an Ipython session by typing something like:
+#     C:\Anaconda\ipython.exe notebook
+# 2.) Open a browser and navigate to the given url, 
+#     probably something like: http://localhost:8888/
+# 3.) Press 'New Notebook' in the upper righthand corner.
+# 4.) Enter the python statements in this exercise into the notebook prompt.
+
+#%%
+# We are going to construct a simple stacked bar chart ... 
+
+# Import the training data. 
+import csv as csv
+import numpy as np
+
+o= open('train.csv', 'rb')
+csv_file= csv.reader(o)                                # Load the csv file.
+header= csv_file.next()                                # Skip the first line as it is a header.
+data= []                                               # Create a variable to hold the data.
+
+for row in csv_file:                                   # Skip through each row in the csv file,
+    data.append(row[0:])                               # adding each row to the data variable.
+data= np.array(data)                                   # Then convert from a list to a Numpy array.
+o.close()
+
+# Import matplotlib and allow it to plot in the notebook.
+import matplotlib.pyplot as plt
+%matplotlib inline                                     
+
+# Import Numpy
+import numpy as np
+
+# Make some magic numbers for the plot ... like:
+# The location along the x-axis where the bars will sit.
+# And the width of the bars.
+bottom_locs= np.array([1.,2.])
+width= 0.3                     
+
+# Define the actual quanities to plot:
+# The numbers of men who died and who survived.
+# The numbers of women who died and who survived.
+men_only_stats= data[0::,4] != "female"                   # This finds all the men. 
+men_onboard= data[men_only_stats,1].astype(np.float)      # 1st column of data (survived= 0,1), but only men
+men= (np.size(men_onboard)-np.sum(men_onboard), np.sum(men_onboard))
+
+women_only_stats= data[0::,4] == "female"                 # This finds all the women. 
+women_onboard= data[women_only_stats,1].astype(np.float)  # 1st column of data (survived= 0,1), but only women. 
+women= (np.size(women_onboard)-np.sum(women_onboard), np.sum(women_onboard))
+
+# Add the values to the plot.
+plt.bar(bottom_locs, men, label= 'Male', width= width)
+plt.bar(bottom_locs, women, color= 'm', label= 'Female', width= width, bottom= men)
+
+# Decorate the plot.
+plt.ylabel('Count')
+plt.title("Who Survived the Titanic?")
+plt.legend(loc='best')
+plt.xticks(bottom_locs+width/2., ('Died', 'Survived'))

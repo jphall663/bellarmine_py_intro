@@ -15,6 +15,24 @@ Python exercises for Bellarmine Analytics program
 
 """
 
+### PREFACE ###################################################################
+
+### A quick note about comments ..
+### Lines like this are called comments - they are not executed.
+#%% 
+# Comments like this create separate cells in the Spyder IDE.
+#%%
+"""
+You can have multi-line comments by using triple quotes ...
+like this.
+"""
+
+### A quick note about working directories ...
+# All the exercises below assume you have set your working directory
+# to the directory you downloaded for the class. Use the working directory 
+# dialog in the upper right hand corner of the Spyder IDE to set your working 
+# directory. 
+
 ### EXERCISE 1: WORKING WITH STRINGS ##########################################
 
 ### This string represents a user being logged by a web server.
@@ -82,6 +100,8 @@ user_string3= 'Mozilla/5.0 (Windows NT 6.0; WOW64) AppleWebKit/536.4 (KHTML, lik
 # working on.   
   
 ### Why do you think progress indicator's are important? 
+  
+### BONUS EXERCISE 2.5: Execute the solution_2.py file from the OS command prompt. 
         
 ### EXERCISE 3: LISTS, DICTIONARIES, AND SETS ################################# 
 ### In exercises 2 and 3 we will clean up several example dating profiles. Once we have 
@@ -182,23 +202,46 @@ url= 'http://archive.ics.uci.edu/ml/machine-learning-databases/abalone/abalone.d
 # for loop.  
 
 # EXERCISE 4.5: Name some other places on the web to find data.
-"""
-- https://www.data.gov/
-- http://archive.ics.uci.edu/ml/
-- http://www.quora.com/Where-can-I-find-large-datasets-open-to-the-public
-- APIs: https://developers.facebook.com/, https://dev.twitter.com/
-- https://archive.org/web/
-- http://www.kaggle.com/
-...
-"""
 
 ### EXERCISE 5: KAGGLE TITANIC COMPETITION ####################################
 
-# REFERENCE: http://www.kaggle.com/c/titanic-gettingStarted
+### REFERENCES: 
+# http://www.kaggle.com/c/titanic-gettingStarted
+# http://wiki.scipy.org/Tentative_NumPy_Tutorial
+# https://docs.python.org/2/library/csv.html
+# gendermodel.py - by Kaggle user AstroDave
+
+### EXERCISE 5.1: Use the csv module to read the titanic training data 
+# (train.csv) into a numpy array called data.   
+
+### EXERCISE 5.2
+# A: How many people were on the titanic?
+# B: How many people survived?
+# C: What proportion of people survived?
+
+# EXERCISE 5.3: "WOMEN AND CHILDREN FIRST!" 
+# What proportion of women survived? What proportion of men survived?
+
+# EXERCISE 5.4: Use the results of this analysis to make predictions about the 
+# the passengers in the test set. Basically, if the passenger was a male, we
+# predict he will die. If she was female, we predict she will survive. 
+#
+# Make a CSV file containing only two columns:
+# First column: the passenger IDs from the test.csv file.
+# Second column: a 0 if the passender was male; a 1 if the passenger was female. 
+# The first row (header) should read: "PassengerId", "Survived"
+
+# (HINT) First, read in test.csv, skipping the first row.
+# (HINT) Then, write the predictions file ...
+# (HINT) Write the column headers. Then, for each row in the test file, if it 
+# is a female, then write the PassengerId, and predict 1. Otherwise the 
+# passenger is male, and write the PassengerId, and predict 0.
+
+# BONUS EXERCISE 5.5: Submit your model to the Kaggle competition. What was 
+# your score? What does this number mean?
 
 ### EXERCISE 6: IPYTHON: PLOTTING RESULTS #####################################
 
-
-
-
+### REFERENCES: 
+# http://nbviewer.ipython.org/github/agconti/kaggle-titanic/blob/master/Titanic.ipynb
 
