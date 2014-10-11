@@ -10,19 +10,18 @@ Python exercise SOLUTIONS for Bellarmine Analytics program
 2.) Loops and File I/O 
 3.) Lists, Dictionarys and Sets
 4.) Scraping Data From the Web 
-5.) Numpy and Scipy 
-6.) Kaggle Titanic Competition 
-7.) Graphing Results
+5.) Numpy: Kaggle Titanic Competition 
+6.) Ipython: Graphing Results
 
 """
 
 ### EXERCISE 1: WORKING WITH STRINGS ##########################################
 
-### This string represents a user being logged by a web server
-### It contains information such as the user's operating system and browser
+### This string represents a user being logged by a web server.
+### It contains information such as the user's operating system and browser.
 
 #%%
-user_string1= 'Mozilla/5.0 (Windows NT 6.1; WOW64) App3leWebKit/53.1 (KHTML, like Gecko) Version/4.0 Safari/533.1'
+user_string1= 'Mozilla/5.0 (Windows NT 6.0; WOW64) App3leWebKit/54.1 (KHTML, like Gecko) Version/4.0 Safari/539.1'
 print user_string1
 #%%
 
@@ -47,7 +46,7 @@ print user_string1[-12:-6]
 # ESCAPE CHARACTERS 
 # REFERENCE: https://docs.python.org/2/tutorial/introduction.html#strings
 
-### EXERCISE 1.3: Print the user's operating system and browser as a single tab-delimited string
+### EXERCISE 1.3: Print the user's operating system and browser as a single tab-delimited string.
 print user_string1[13:27] + '\t' + user_string1[-12:-6]
 #%%
 ### EXERCISE 1.4: Print the user's operating system and browser on separate lines using only one python print statement. 
@@ -72,8 +71,8 @@ Other common escape characters include:
 # STRING FUNCTIONS
 # REFERENCE: https://docs.python.org/2/library/stdtypes.html#string-methods
 
-user_string2= 'Mozilla/5.0 (Linux; Android 2.2) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.56 Mobile Safari/536.5'
-user_string3= 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.56 Safari/536.5'
+user_string2= 'Mozilla/5.0 (Linux; Android 3.2) AppleWebKit/536.4 (KHTML, like Gecko) Safari/536.4'
+user_string3= 'Mozilla/5.0 (Windows NT 6.0; WOW64) AppleWebKit/536.4 (KHTML, like Gecko) Safari/536.4'
 #%%
 
 ### EXERCISE 1.5: Convert user_string2 and user_string3 to lowercase and print them. Why is this a good idea?
@@ -105,6 +104,13 @@ line1= 'user1\t' + user_string1[13:27] + '\t' + user_string1[-12:-6]
 line2= 'user2\t' + user_string2[13:27] + '\t' + user_string2[-12:-6]
 line3= 'user3\t' + user_string3[13:27] + '\t' + user_string3[-12:-6]
 print '\n'.join((line1, line2, line3))
+
+### Why does it matter what operating system a user is using?
+
+"""
+It is rumored that an online travel agency was able to mark up ticket prices to 
+users of a certain 'fancy' OS without negatively affecting sales numbers ...  
+"""
 
 #%%
 ### EXERCISE 2: LOOPS AND FILE I/O ############################################ 
@@ -237,23 +243,23 @@ print 'Done.'
 # occuring terms in the cleaned profiles and keep only them in the profiles. Create 
 # a new file called 'profiles_cleaned_freq.txt'.
 
-# Import the collections module 
+# Import the collections module.
 import collections
 
-# Create a list of every word in the cleaned profiles
+# Create a list of every word in the cleaned profiles.
 words= []
 with open('profiles_clean.txt') as in_file:
     for line in in_file:
         words+= line.split()
 
-# Creates a dictionary of term counts               
+# Creates a dictionary of term counts.              
 term_counts= collections.Counter(words) 
 print term_counts
 
-# Creates a set that keeps only terms in the dictionary that occured more that ten times        
+# Creates a set that keeps only terms in the dictionary that occured more that ten times.        
 keep_set= set([k for k in term_counts.keys() if term_counts[k] >= 10]) 
 
-# Keep only these frequently occuring terms 
+# Keep only these frequently occuring terms.
 with open('profiles_clean.txt') as in_file:
     with open ('profiles_clean_freq.txt', 'w') as out_file:  
         for line in in_file:
@@ -267,7 +273,7 @@ with open('profiles_clean.txt') as in_file:
 # of the profiles are the best match. Print the term counts to a new file called 
 # 'profiles_term_counts.txt'.
 
-# Import collections module
+# Import collections module.
 import collections
 
 # Print a dictionary of term counts for each individual cleaned profile
@@ -282,6 +288,109 @@ with open('profiles_clean_freq.txt') as in_file:
                  out_file.write(key + ' ' + str(term_counts[key]) + '\n')
              
 #%%
+### EXERCISE 4: SCRAPING DATA FROM THE WEB ####################################
 
+# REFERENCE: https://docs.python.org/2/howto/urllib2.html
+# REFERENCE: http://www.crummy.com/software/BeautifulSoup/bs4/doc/
+# REFERENCE: https://docs.python.org/2/tutorial/controlflow.html#more-on-defining-functions
 
+import urllib2
+from bs4 import BeautifulSoup
+url= 'http://www.bellarmine.edu/analytics/'
+
+#%%
+### EXERCISE 4.1: Use urllib2 and BeautifulSoup to scrape information from the 
+# Bellarmine MSA homepage and print it to the console.  
+connection= urllib2.urlopen(url)
+print BeautifulSoup(connection).prettify()
+
+#%%
+### EXERCISE 4.2: Define a function to extract only the text within paragraphs 
+# from a web page and print that text to the console. Use the Bellarmine MSA 
+# page to test your function.  
+
+# Define the get_pretty_text_from_url function.
+def get_pretty_text_from_url(url):
+    # Connect to the url.
+    connection= urllib2.urlopen(url)
+    # Use the find_all function from BeautifulSoup to locate the paragraphs.
+    for block in BeautifulSoup(connection).find_all('p'):
+        # Use the get_text function from BeautifulSoup to extract the text from 
+        # from each paragraph.
+        print block.get_text()
+        print '\n'
+        
+# Execute the function.
+get_pretty_text_from_url(url)
+
+#%%
+### EXERCISE 4.3: Use the get_pretty_text_from_url function to cycle through 
+# every link on the Bellarmine MSA page and print the text from every paragraph 
+# of every link to the console.  
+
+# REFERENCE: https://docs.python.org/2/tutorial/errors.html
+
+# Connect to the url
+connection= urllib2.urlopen(url)
+# Use a for loop and the BeautifulSoup find_all() function to cycle through
+# every link on the Bellarmine MSA page.
+# find_all('a') will locate hyperlinks.
+for link in BeautifulSoup(connection).find_all('a'):
+    # get('href') will extract links.
+    link= link.get('href')
+    # Check that a link was extracted successfully.     
+    if (link != None):
+        # Skip internal links.
+        if (link.startswith('http://') or link.startswith('https://')): 
+            # Use a try-catch block to continue to new links in the list even
+            # if a given link causes an error.
+            try:
+                get_pretty_text_from_url(link)
+            except: 
+                print 'Link %s is unavailable.' % link
+                continue
+
+### This may take a few minutes to run.
+
+#%%            
+### EXERCISE 4.4. Scrape the famous Abolone data set from the UCI repository and
+# write it to a CSV file.          
+
+# Read a bit about the file.
+url= 'http://archive.ics.uci.edu/ml/machine-learning-databases/abalone/abalone.names'
+get_pretty_text_from_url(url)
+
+# Fetch the data and save it.
+url= 'http://archive.ics.uci.edu/ml/machine-learning-databases/abalone/abalone.data'
+connection= urllib2.urlopen(url)
+# Since the structure of the page is very simple, we can use the 
+# urllib2 read() function to parse the table. 
+table= connection.read()
+# Open a new CSV file, 'abolone.csv', and write the table to the CSV using a 
+# for loop.  
+o= open('abalone.csv', 'w')
+for line in table.split('\n'):
+    line= line.strip()
+    if (line != ''):
+        o.write(line + '\n')
+o.close()
+
+#%%
+
+# EXERCISE 4.5: Name some other places on the web to find data.
+"""
+- https://www.data.gov/
+- http://archive.ics.uci.edu/ml/
+- http://www.quora.com/Where-can-I-find-large-datasets-open-to-the-public
+- APIs: https://developers.facebook.com/, https://dev.twitter.com/
+- https://archive.org/web/
+- http://www.kaggle.com/
+...
+"""
+
+### EXERCISE 5: KAGGLE TITANIC COMPETITION ####################################
+
+# REFERENCE: http://www.kaggle.com/c/titanic-gettingStarted
+
+### EXERCISE 6: IPYTHON: PLOTTING RESULTS #####################################
 
