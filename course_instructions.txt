@@ -1,0 +1,5 @@
+1.) Download course materials from:
+https://github.com/jphall663/bellarmine_py_intro/archive/master.zip
+
+2.) Download Anaconda Python version 2.0.1 for your operating system from:
+http://repo.continuum.io/archive/index.html

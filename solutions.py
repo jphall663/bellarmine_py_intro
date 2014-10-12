@@ -317,7 +317,7 @@ def get_pretty_text_from_url(url):
     connection= urllib2.urlopen(url)
     # Use the find_all function from BeautifulSoup to locate the paragraphs.
     for block in BeautifulSoup(connection).find_all('p'):
-        # Use the get_text function from BeautifulSoup to extract the text from 
+        # Use the get_text function from BeautifulSoup to extract the text 
         # from each paragraph.
         print block.get_text()
         print '\n'

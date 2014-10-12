@@ -168,7 +168,7 @@ url= 'http://www.bellarmine.edu/analytics/'
 # (HINT) Connecting to the url.
 # (HINT) Using the find_all function from BeautifulSoup to locate the paragraphs.
 # (HINT) find_all('p')
-# (HINT) Using the get_text function from BeautifulSoup to extract the text from 
+# (HINT) Using the get_text function from BeautifulSoup to extract the text  
 # from each paragraph.
 # (HINT) Execute the function - don't forget!
 
