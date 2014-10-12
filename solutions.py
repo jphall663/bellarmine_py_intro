@@ -8,10 +8,10 @@ Python exercise SOLUTIONS for Bellarmine Analytics program
 
 1.) Working With Strings
 2.) Loops and File I/O 
-3.) Lists, Dictionarys and Sets
-4.) Scraping Data From the Web 
+3.) Lists, Dictionaries and Sets
+4.) Scraping Data from the Web 
 5.) Numpy: Kaggle Titanic Competition 
-6.) Ipython: Graphing Results
+6.) IPython: Graphing Results
 
 """
 
