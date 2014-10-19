@@ -222,7 +222,12 @@ url= 'http://archive.ics.uci.edu/ml/machine-learning-databases/abalone/abalone.d
 # EXERCISE 5.3: "WOMEN AND CHILDREN FIRST!" 
 # What proportion of women survived? What proportion of men survived?
 
-# EXERCISE 5.4: Use the results of this analysis to make predictions about the 
+# EXERCISE 5.4: Let's see how accurate our model is on the training data.
+# For every person in the training data, predict that men will die and
+# women will survive. What percentage of the time are we correct? Is this  
+# more accurate than predicting everyone dies?
+
+# EXERCISE 5.5: Use the results of this analysis to make predictions about  
 # the passengers in the test set. Basically, if the passenger was a male, we
 # predict he will die. If she was female, we predict she will survive. 
 #

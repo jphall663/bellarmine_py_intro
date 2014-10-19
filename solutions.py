@@ -36,11 +36,11 @@ print user_string1
 
 #%%
 ### EXERCISE 1.1: Print only the user's operating system. 
-print user_string1[13:27]
+print user_string1[user_string1.index('(')+1:user_string1.index(';')]
 
 #%%
 ### EXERCISE 1.2: Print only the user's browser.  
-print user_string1[-12:-6]
+print user_string1[user_string1.rindex(' ')+1:user_string1.rindex('/')]
 
 #%%
 # ESCAPE CHARACTERS 
@@ -124,29 +124,29 @@ users of a certain 'fancy' OS without negatively affecting sales numbers ...
 
 ### EXERCISE 2.1: Count the number of lines in the profiles_raw.txt file.
 i= 0
-with open('profiles_raw.txt') as f:
+with open('profiles_raw.txt', 'r') as f:
     for i, line in enumerate(f): 
         pass
-print 'The number of lines is:  %i.' % (i+1)
+print 'The number of lines is:  %d.' % (i+1)
 
 #%%
 ### EXERCISE 2.2: Remove all non-alphabetic characters from the profiles_raw.txt file.
 ### Save the new file as profiles_clean.txt.                   
 clean_line= ''
-with open('profiles_raw.txt') as in_file:
+with open('profiles_raw.txt', 'r') as in_file:
     with open('profiles_clean.txt', 'w') as out_file:
         for line in in_file:
             for character in line:
                 if (character.isalpha() or character.isspace()):
                     clean_line+= character
             out_file.write(clean_line)
-
+            clean_line= ''
 #%%
 ### EXERCISE 2.3: Modify your code from exercise 2.2 to remove all non-alphabetic 
 # characters from the profiles_raw.txt file and to convert all lines of new the 
 # 'profiles_clean.txt' file to lowercase.   
 clean_line= ''
-with open('profiles_raw.txt') as in_file:
+with open('profiles_raw.txt', 'r') as in_file:
     with open('profiles_clean.txt', 'w') as out_file:
         for line in in_file:
             for character in line:
@@ -154,18 +154,18 @@ with open('profiles_raw.txt') as in_file:
                     clean_line+= character
                 clean_line= clean_line.lower()
             out_file.write(clean_line)
-  
+            clean_line= ''
 #%%          
 ### EXERCISE 2.4: Use the solutions of exercises 2.1 and 2.3 to create a progress indicator 
 # for our file cleaning code.               
 i= 0
-with open('profiles_raw.txt') as f:
+with open('profiles_raw.txt', 'r') as f:
     for i, line in enumerate(f): 
         pass
 nlines= i+1
 
 clean_line= ''
-with open('profiles_raw.txt') as in_file:
+with open('profiles_raw.txt', 'r') as in_file:
     with open('profiles_clean.txt', 'w') as out_file:
         for j, line in enumerate(in_file):
             for character in line:
@@ -173,7 +173,8 @@ with open('profiles_raw.txt') as in_file:
                     clean_line+= character
                 clean_line= clean_line.lower()
             out_file.write(clean_line)
-            print 'Line %i/%i cleaned ...' % (j+1, i+1)
+            clean_line= ''
+            print 'Line %d/%d cleaned ...' % (j+1, i+1)
 print 'Done.'
 
 ### Why are progress indicator's important? 
@@ -208,36 +209,36 @@ and stop it ... just to find out it was almost finished !!!
 ### EXERCISE 3.1: Turn each line into a list to count the number of words in 
 # the profiles_raw.txt file.
 i= 0
-with open('profiles_raw.txt') as f:
+with open('profiles_raw.txt', 'r') as f:
     for line in f:
         i+= len(line.split())
-print 'The number of words is:  %i.' % (i)
+print 'The number of words is:  %d.' % (i)
 
 #%%
 ### EXERCISE 3.2: Use list comprehensions to re-write the solution to exercise 2.4
 # in a more pythonic fashion.
-nlines= sum(1 for line in open('profiles_raw.txt'))
-print 'The number of lines is:  %i.' % (nlines)
+nlines= sum(1 for line in open('profiles_raw.txt', 'r'))
+print 'The number of lines is:  %d.' % (nlines)
 
-with open('profiles_raw.txt') as in_file:
+with open('profiles_raw.txt', 'r') as in_file:
     with open('profiles_clean.txt', 'w') as out_file:
         for j, line in enumerate(in_file):
             out_file.write(' '.join([word.lower() if (word.isalpha() or word.isspace()) else '' for word in line.split()]) + '\n')        
-            print 'Line %i/%i cleaned ...' % (j+1, nlines)
+            print 'Line %d/%d cleaned ...' % (j+1, nlines)
 print 'Done.'
 
 #%%
 ### Exercise 3.3: Modify the list comprehension in exercise 3.2 to remove words 
 # with 3 or less characters in addition to the other cleaning tasks. 
 
-nlines= sum(1 for line in open('profiles_raw.txt'))
-print 'The number of lines is:  %i.' % (nlines)
+nlines= sum(1 for line in open('profiles_raw.txt', 'r'))
+print 'The number of lines is:  %d.' % (nlines)
 
-with open('profiles_raw.txt') as in_file:
+with open('profiles_raw.txt', 'r') as in_file:
     with open('profiles_clean.txt', 'w') as out_file:
         for j, line in enumerate(in_file):
             out_file.write(' '.join([word.lower() if (len(word.strip()) >= 4 and (word.isalpha() or word.isspace())) else '' for word in line.split()]) + '\n')        
-            print 'Line %i/%i cleaned ...' % (j+1, nlines)
+            print 'Line %d/%d cleaned ...' % (j+1, nlines)
 print 'Done.'
 
 #%%
@@ -250,7 +251,7 @@ import collections
 
 # Create a list of every word in the cleaned profiles.
 words= []
-with open('profiles_clean.txt') as in_file:
+with open('profiles_clean.txt', 'r') as in_file:
     for line in in_file:
         words+= line.split()
 
@@ -262,7 +263,7 @@ print term_counts
 keep_set= set([k for k in term_counts.keys() if term_counts[k] >= 10]) 
 
 # Keep only these frequently occuring terms.
-with open('profiles_clean.txt') as in_file:
+with open('profiles_clean.txt', 'r') as in_file:
     with open ('profiles_clean_freq.txt', 'w') as out_file:  
         for line in in_file:
             line_list= line.split()
@@ -280,12 +281,12 @@ import collections
 
 # Print a dictionary of term counts for each individual cleaned profile
 # Which of these profiles looks the most compatible to you?            
-with open('profiles_clean_freq.txt') as in_file:
+with open('profiles_clean_freq.txt', 'r') as in_file:
     with open('profiles_term_counts.txt', 'w') as out_file:
         for i, line in enumerate(in_file): 
              term_counts= collections.Counter(line.split())
              out_file.write('----------------------------------------\n')
-             out_file.write('Profile %i term counts: \n' % (i+1))
+             out_file.write('Profile %d term counts: \n' % (i+1))
              for key in term_counts:
                  out_file.write(key + ' ' + str(term_counts[key]) + '\n')
              
@@ -404,13 +405,13 @@ o.close()
 import csv as csv
 import numpy as np
 
-o= open('train.csv', 'rb')
+o= open('train.csv', 'r')
 csv_file= csv.reader(o)                                # Load the csv file.
 header= csv_file.next()                                # Skip the first line as it is a header.
 data= []                                               # Create a variable to hold the data.
 
 for row in csv_file:                                   # Skip through each row in the csv file,
-    data.append(row[0:])                               # adding each row to the data variable.
+    data.append(row)                                   # adding each row to the data variable.
 data= np.array(data)                                   # Then convert from a list to a Numpy array.
 o.close()
 
@@ -421,7 +422,7 @@ o.close()
 #%%
 ### EXERCISE 5.2
 # A: How many people were on the titanic?
-number_passengers= np.size(data[::,1].astype(np.float))  # :: means every element
+number_passengers= np.size(data[::,1])                   # :: means every element
 print number_passengers                                  # [::,1] every row in the first column
                                                          # Numpy matrices [rows, columns]
 # B: How many people survived?
@@ -436,18 +437,33 @@ print proportion_survivors
 # EXERCISE 5.3: "WOMEN AND CHILDREN FIRST!" 
 # What proportion of women survived? What proportion of men survived?
 
-women_only_stats= data[0::,4] == "female" 	              # This finds where all the women are in the data set.
-women_onboard= data[women_only_stats,1].astype(np.float) # 1st column of data (survived= 0,1), but only women. 
-proportion_women_survived = np.sum(women_onboard) / np.size(women_onboard)
+women_only_stats= data[0::,4] == "female" 	                   # This finds where all the women are in the data set.
+women_onboard= data[women_only_stats,1].astype(np.float)      # 1st column of data (survived= 0,1), but only women. 
+proportion_women_survived= np.sum(women_onboard) / np.size(women_onboard)
 print 'Proportion of women who survived is %s' % proportion_women_survived
 
-men_only_stats= data[0::,4] != "female" 	              # This finds all the men. 
-men_onboard= data[men_only_stats,1].astype(np.float)     # 1st column of data (survived= 0,1), but only men.
-proportion_men_survived = np.sum(men_onboard) / np.size(men_onboard)
+men_only_stats= data[0::,4] != "female" 	                   # This finds all the men. 
+men_onboard= data[men_only_stats,1].astype(np.float)          # 1st column of data (survived= 0,1), but only men.
+proportion_men_survived= np.sum(men_onboard) / np.size(men_onboard)
 print 'Proportion of men who survived is %s' % proportion_men_survived
 
 #%%
-# EXERCISE 5.4: Use the results of this analysis to make predictions about the 
+# EXERCISE 5.4: Let's see how accurate our model is on the training data.
+# For every person in the training data, predict that men will die and
+# women will survive. What percentage of the time are we correct? Is this  
+# more accurate than predicting everyone dies?
+
+training_target=  data[::, 1].astype(np.float)
+training_predictions= np.array([1 if data[i, 4]=='female' else 0 for i in range(0, number_passengers)], dtype= 'float64')
+training_correct_classification_rate= 1-(np.sum(np.abs(training_target-training_predictions))/number_passengers)
+print 'Training correct classification rate is %s' % training_correct_classification_rate
+
+# Is this more accurate than predicting everyone dies? YES
+# The correct classification rate for predicting everyone dies is: 
+# 1-proportion_survivors= 0.616161616162
+
+#%%
+# EXERCISE 5.5: Use the results of this analysis to make predictions about  
 # the passengers in the test set. Basically, if the passenger was a male, we
 # predict he will die. If she was female, we predict she will survive. 
 #
@@ -475,7 +491,7 @@ o.close()
 p.close()
 
 #%% 
-# BONUS EXERCISE 5.5: Submit your model to the Kaggle competition. What was 
+# BONUS EXERCISE 5.6: Submit your model to the Kaggle competition. What was 
 # your score? What does this number mean?
 
 """

@@ -26,7 +26,11 @@ http://www.bellarmine.edu/analytics/
 Your industry is:
 Other --> Education
 
-4.) Record your key information below:
+4.) Record your key information below.
+
+5.) To execute from Anaconda terminal:
+
+python C:/Path/to/yelp_api_example.py
 """
 
 ### AUTHENTICATION INFORMATION 
@@ -38,14 +42,14 @@ TOKEN= ''
 TOKEN_SECRET= ''
 
 ### QUERY INFORMATION 
-# YOU CAN CHANGE THESE TO YOUR LIKING
+# YOU CAN ATTEMPT TO CHANGE THESE
 # TERMS LIKE: dinner AND restaurant WORK WELL
 # LOCATIONS ARE SEPARATED BY COMMAS
-# SEARCH_LIMIT MUST BE <= 20
+# SEARCH_LIMIT <= 20
 # REMEMBER YOU MAY BE LIMITED TO A CERTAIN NUMBER OF
 #   SEARCHES (SEARCH_LIMIT) PER DAY
 # YOU MAY ATTEMPT TO ADD MORE FIELDS TO YOUR OUTPUT
-#   BUT THE CODE BELOW IS ONLY VALID FOR NON-NESTED
+#   BUT THE CODE AS WRITTEN IS ONLY VALID FOR NON-NESTED
 #   DICTIONARY ELEMENTS
 
 TERM= 'restaurant'
@@ -98,7 +102,7 @@ def write_output(businesses, term, location):
     for i in range(0, len(businesses)):
         try:
             business_id= businesses[i]['id']
-            print 'Result for business "{0}" found ...'.format(business_id)
+            print 'Parsing result for business "{0}" ...'.format(business_id)
             count += 1
             csv_writer.writerow([str(businesses[i][key]).encode('ascii', 'ignore') \
                 for key in businesses[i].keys() if key.encode('ascii', 'ignore') in DESIRED_FIELDS])
@@ -123,7 +127,7 @@ def request(host, path, url_params= None):
         urllib2.HTTPError: An error occurs from the HTTP request.
     """
     
-    ### AUTHENTICATE 
+    ### AUTHENTICATION 
     url_params= url_params or {}
     url= 'http://{0}{1}?'.format(host, path)
     consumer= oauth2.Consumer(CONSUMER_KEY, CONSUMER_SECRET)
@@ -150,7 +154,7 @@ def request(host, path, url_params= None):
     return response
 
 def query_api(term, location):
-    """Begins onstructing queries to the API by the input values from
+    """Begins constructing queries to the API by the input values from
        the user and validates query response.
     
     Args:
@@ -158,7 +162,8 @@ def query_api(term, location):
         location (str): The location of the business to query.
     """
 
-    url_params = {
+    ### PREPARE TERMS TO BE PLACED IN API URL
+    url_params= {
         'term': term.replace(' ', '+'),
         'location': location.replace(' ', '+'),
         'limit': SEARCH_LIMIT
@@ -174,12 +179,10 @@ def query_api(term, location):
         print 'No businesses for {0} in {1} found.'.format(term, location)
         return
     else:
-        print '{0} businesses found, querying business info ...'.format(len(businesses))  
+        print '{0} businesses found, parsing business info ...'.format(len(businesses))  
         write_output(businesses, term, location)
 
 ### EXECUTE
-# FROM ANACONDA TERMINAL:
-# python "C:/Path/to/yelp_api_example.py"
 def main():
 
     try:

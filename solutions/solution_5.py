@@ -18,17 +18,16 @@ csv_file= csv.reader(o)
 header= csv_file.next()                                
 data= []                                               
 for row in csv_file:                                  
-    data.append(row[0:])                               
+    data.append(row)                               
 data= np.array(data)                                  
 o.close()
 
-
-### EXERCISE 5.2
+# EXERCISE 5.2
 print np.size(data[::,1].astype(np.float))  
 print np.sum(data[::,1].astype(np.float))
-print np.sum(data[::,1].astype(np.float))/np.size(data[::,1].astype(np.float))                             
+print np.sum(data[::,1].astype(np.float))/np.size(data[::,1])                             
           
-# EXERCISE 5.3: "
+# EXERCISE 5.3
 women_only_stats= data[0::,4] == "female" 	              
 women_onboard= data[women_only_stats,1].astype(np.float) 
 proportion_women_survived = np.sum(women_onboard) / np.size(women_onboard)
@@ -39,8 +38,15 @@ men_onboard= data[men_only_stats,1].astype(np.float)
 proportion_men_survived = np.sum(men_onboard) / np.size(men_onboard)
 print 'Proportion of men who survived is %s' % proportion_men_survived
 
-# EXERCISE 5.4: Use the results of this analysis to make predictions about the 
-# the passengers in the test set.
+# EXERCISE 5.4
+
+number_passengers= np.size(data[::,1])
+training_target=  data[::, 1].astype(np.float)
+training_predictions= np.array([1 if data[i, 4]=='female' else 0 for i in range(0, number_passengers)], dtype= 'float64')
+training_correct_classification_rate= 1-(np.sum(np.abs(training_target-training_predictions))/number_passengers)
+print 'Training correct classification rate is %s' % training_correct_classification_rate
+
+# EXERCISE 5.5
 
 # Read in test.csv, skipping first row
 o= open('test.csv', 'r')

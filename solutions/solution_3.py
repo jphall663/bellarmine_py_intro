@@ -11,13 +11,13 @@ SOLUTION TO EXERCISE 3
 import collections
 
 # Determine number of lines in the raw file
-nlines= sum(1 for line in open('profiles_raw.txt'))
+nlines= sum(1 for line in open('profiles_raw.txt', 'r'))
 print 'The number of lines is:  %i.' % (nlines)
 
 # Clean raw file
 # Using list comprehensions 
 # With progress indicator
-with open('profiles_raw.txt') as in_file:
+with open('profiles_raw.txt', 'r') as in_file:
     with open('profiles_clean.txt', 'w') as out_file:
         for j, line in enumerate(in_file):
             out_file.write(' '.join([word.lower() if (len(word.strip()) >= 4 and (word.isalpha() or word.isspace())) else '' for word in line.split()]) + '\n')        
@@ -26,7 +26,7 @@ print 'Done.'
 
 # Create a list of every word in the cleaned profiles
 words= []
-with open('profiles_clean.txt') as in_file:
+with open('profiles_clean.txt', 'r') as in_file:
     for line in in_file:
         words+= line.split()
 
@@ -38,7 +38,7 @@ print term_counts
 keep_set= set([k for k in term_counts.keys() if term_counts[k] >= 10]) 
 
 # Create a new file with only these frequently occuring terms 
-with open('profiles_clean.txt') as in_file:
+with open('profiles_clean.txt', 'r') as in_file:
     with open ('profiles_clean_freq.txt', 'w') as out_file:  
         for line in in_file:
             line_list= line.split()
@@ -47,7 +47,7 @@ with open('profiles_clean.txt') as in_file:
             
 # Print a dictionary of term counts for each individual cleaned profile
 # Which of these profiles looks the most compatible to you?            
-with open('profiles_clean_freq.txt') as in_file:
+with open('profiles_clean_freq.txt', 'r') as in_file:
     with open('profiles_term_counts.txt', 'w') as out_file:
         for i, line in enumerate(in_file): 
              term_counts= collections.Counter(line.split())
