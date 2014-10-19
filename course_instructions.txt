@@ -3,3 +3,8 @@ https://github.com/jphall663/bellarmine_py_intro/archive/master.zip
 
 2.) Download Anaconda Python version 2.0.1 for your operating system from:
 http://repo.continuum.io/archive/index.html
+
+3.) Install Anaconda Python version 2.0.1.
+
+4.) Set working directory in Spyder IDE to the directory containing the course materials. 
+

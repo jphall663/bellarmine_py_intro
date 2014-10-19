@@ -1,4 +1,4 @@
 bellarmine_py_intro
 ===================
 
-Materials for Python intro. at Bellarmine 
+Code and materials for Python intro. at Bellarmine 
