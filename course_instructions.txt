@@ -8,3 +8,9 @@ http://repo.continuum.io/archive/index.html
 
 4.) Set working directory in Spyder IDE to the directory containing the course materials. 
 
+Note that you must open a new Python console in Spyder:
+
+Consoles -> Open Python Console 
+
+For your new working directory to take effect.
+
