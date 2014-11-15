@@ -60,7 +60,7 @@ skip_header = test_file.next()
 
 # Write the column headers.
 # For each row in the test file,
-# if it a female, then
+# if itb is a female, then
 # write the PassengerId, and predict 1.
 # Otherwise the passenger is male,
 # write the PassengerId, and predict 0.
