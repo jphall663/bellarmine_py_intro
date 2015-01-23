@@ -1,4 +1,10 @@
 """
+DISCLAIMER:  
+                                                                
+THIS INFORMATION IS PROVIDED "AS IS". THERE ARE NO WARRANTIES,
+EXPRESSED OR IMPLIED, AS TO MERCHANTABILITY OR FITNESS FOR A
+PARTICULAR PURPOSE REGARDING THE ACCURACY OF THE MATERIALS OR CODE
+CONTAINED HEREIN.
 
 This simple code is desinged to teach a basic user to read in the files in
 python, simply find what proportion of males and females survived and make

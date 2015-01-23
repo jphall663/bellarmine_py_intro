@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 
 """
+DISCLAIMER:  
+                                                                
+THIS INFORMATION IS PROVIDED "AS IS". THERE ARE NO WARRANTIES,
+EXPRESSED OR IMPLIED, AS TO MERCHANTABILITY OR FITNESS FOR A
+PARTICULAR PURPOSE REGARDING THE ACCURACY OF THE MATERIALS OR CODE
+CONTAINED HEREIN.
 
 Sample program to query the Yelp API.
 

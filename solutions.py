@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Oct  5 10:56:34 2014
+DISCLAIMER:  
+                                                                
+THIS INFORMATION IS PROVIDED "AS IS". THERE ARE NO WARRANTIES,
+EXPRESSED OR IMPLIED, AS TO MERCHANTABILITY OR FITNESS FOR A
+PARTICULAR PURPOSE REGARDING THE ACCURACY OF THE MATERIALS OR CODE
+CONTAINED HEREIN.
 
 @author: jpatrickhall@gmail.com
 
