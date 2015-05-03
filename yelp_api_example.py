@@ -1,16 +1,23 @@
 #!/usr/bin/env python
 
 """
-DISCLAIMER:  
-                                                                
-THIS INFORMATION IS PROVIDED "AS IS". THERE ARE NO WARRANTIES,
-EXPRESSED OR IMPLIED, AS TO MERCHANTABILITY OR FITNESS FOR A
-PARTICULAR PURPOSE REGARDING THE ACCURACY OF THE MATERIALS OR CODE
-CONTAINED HEREIN.
+
+Copyright (c) 2015 by Patrick Hall, jpatrickhall@gmail.com
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+   
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-------------------------------------------------------------------------------
 
 Sample program to query the Yelp API.
-
-jpatrickhall@gmail.com
 
 Requirements:
 
@@ -37,6 +44,7 @@ Other --> Education
 5.) To execute from Anaconda terminal:
 
 python C:/Path/to/yelp_api_example.py
+
 """
 
 ### AUTHENTICATION INFORMATION
