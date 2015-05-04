@@ -19,6 +19,7 @@ limitations under the License.
 SOLUTION TO EXERCISE 6
 
 """
+
 # Imports
 import matplotlib.pyplot as plt
 import csv
