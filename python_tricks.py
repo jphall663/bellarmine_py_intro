@@ -33,12 +33,20 @@ Compact scientific notation: %e
 Percent sign: %.2f%%
 """ % (1234.5678, 1234.5678, 1234.5678))
 
+# Compact decimal notation: 1234.57
+# Compact scientific notation: 1.234568e+03
+# Percent sign: 1234.57%
+
 # format string syntax
 print("""
 Compact decimal notation: {dec_:g}
 Compact scientific notation: {exp_:e}
 Percent sign: {per_:.2f}%
 """.format(dec_=1234.5678, exp_=1234.5678, per_=1234.5678))
+
+# Compact decimal notation: 1234.57
+# Compact scientific notation: 1.234568e+03
+# Percent sign: 1234.57%
 
 ### Symbolic math with sympy
 
